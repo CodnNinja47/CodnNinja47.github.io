@@ -15,6 +15,7 @@ body {
     position: relative;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px 0;
 }
 
 .timeline::after {
@@ -94,6 +95,28 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+.content h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.content p {
+    margin: 10px 0;
+    font-size: 1em;
+    color: #555;
+}
+
+.content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para dispositivos móviles */
 @media screen and (max-width: 600px) {
     .timeline::after {
         left: 31px;
@@ -118,6 +141,22 @@ body {
 
     .right {
         left: 0%;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .content h2 {
+        font-size: 1.3em;
+    }
+
+    .content p {
+        font-size: 0.9em;
+    }
+
+    .content img {
+        margin: 8px 0;
     }
 }
 
