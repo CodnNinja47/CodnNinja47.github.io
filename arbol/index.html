@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Árbol de Problemas: Educación Nocturna</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Handlee&display=swap');
+        
+        :root {
+            --color-tronco: #8B4513;
+            --color-hojas: #2E8B57;
+            --color-problema: #8B0000;
+            --color-causa: #CD5C5C;
+            --color-consecuencia: #4169E1;
+            --color-texto: #333;
+            --color-fondo: #F5F5DC;
+        }
+        
+        body {
+            font-family: 'Handlee', cursive;
+            background-color: var(--color-fondo);
+            color: var(--color-texto);
+            margin: 0;
+            padding: 20px;
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            overflow-x: hidden;
+        }
+        
+        .arbol-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+        
+        .titulo-arbol {
+            text-align: center;
+            font-family: 'Merriweather', serif;
+            color: var(--color-tronco);
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .estructura-arbol {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            margin-top: 50px;
+        }
+        
+        /* Sección de raíces (causas) */
+        .raices-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+        
+        .raiz {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            width: 180px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--color-causa);
+            position: relative;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        
+        .raiz::before {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            width: 2px;
+            height: 40px;
+            background-color: var(--color-tronco);
+            transform: translateX(-50%);
+        }
+        
+        /* Tronco central */
+        .tronco-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+        }
+        
+        .tronco {
+            width: 80px;
+            height: 120px;
+            background-color: var(--color-tronco);
+            border-radius: 5px;
+            box-shadow: 
+                inset 0 0 20px rgba(0,0,0,0.3),
+                5px 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .problema-central {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 220px;
+            text-align: center;
+            font-family: 'Merriweather', serif;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--color-problema);
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border: 3px solid var(--color-problema);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .problema-central::before {
+            content: "📌";
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+        }
+        
+        .problema-central::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background-color: var(--color-tronco);
+            transform: translateX(-50%);
+        }
+        
+        /* Sección de ramas (consecuencias) */
+        .ramas-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 40px;
+            width: 100%;
+        }
+        
+        .rama {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            width: 180px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+            border-right: 5px solid var(--color-consecuencia);
+            position: relative;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+        
+        .rama::before {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            width: 2px;
+            height: 40px;
+            background-color: var(--color-hojas);
+            transform: translateX(-50%);
+        }
+        
+        /* Efectos interactivos */
+        .raiz:hover, .rama:hover {
+            transform: scale(1.05);
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2);
+            z-index: 4;
+        }
+        
+        .leyenda {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 50px auto;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            border: 1px dashed var(--color-tronco);
+        }
+        
+        .leyenda-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        
+        .leyenda-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 3px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            font-size: 0.9em;
+            color: var(--color-texto);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .raiz, .rama {
+                width: 140px;
+                font-size: 0.9em;
+            }
+            
+            .problema-central {
+                width: 180px;
+                font-size: 1em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .raices-container, .ramas-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .raiz, .rama {
+                width: 80%;
+                max-width: 250px;
+            }
+            
+            .raiz::before, .rama::before {
+                height: 20px;
+            }
+            
+            .titulo-arbol {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="arbol-container">
+        <h1 class="titulo-arbol">Árbol de Problemas Educativos</h1>
+        
+        <div class="estructura-arbol">
+            <!-- Raíces (Causas) -->
+            <div class="raices-container">
+                <div class="raiz">
+                    <strong>Razones familiares</strong>
+                    <p>Falta de apoyo en el hogar y responsabilidades familiares</p>
+                </div>
+                
+                <div class="raiz">
+                    <strong>Razones laborales</strong>
+                    <p>Necesidad de trabajar en lugar de asistir a clases</p>
+                </div>
+                
+                <div class="raiz">
+                    <strong>Autoestima baja</strong>
+                    <p>Percepción de que "es tarde para estudiar" o miedo al fracaso</p>
+                </div>
+                
+                <div class="raiz">
+                    <strong>Falta de incentivos</strong>
+                    <p>Poca oferta de programas de apoyo para estudiantes nocturnos</p>
+                </div>
+                
+                <div class="raiz">
+                    <strong>Infraestructura deficiente</strong>
+                    <p>Escuelas con pocos recursos y personal insuficiente</p>
+                </div>
+            </div>
+            
+            <!-- Tronco central -->
+            <div class="tronco-container">
+                <div class="problema-central">Baja calidad educativa y alta deserción escolar en la educación nocturna</div>
+                <div class="tronco"></div>
+            </div>
+            
+            <!-- Ramas (Consecuencias) -->
+            <div class="ramas-container">
+                <div class="rama">
+                    <strong>Menores oportunidades</strong>
+                    <p>Laborales por falta de educación</p>
+                </div>
+                
+                <div class="rama">
+                    <strong>Aumento desigualdad</strong>
+                    <p>En acceso a empleos bien remunerados</p>
+                </div>
+                
+                <div class="rama">
+                    <strong>Desmotivación</strong>
+                    <p>En otros estudiantes al ver abandonos</p>
+                </div>
+                
+                <div class="rama">
+                    <strong>Círculo vicioso</strong>
+                    <p>De pobreza por falta de educación</p>
+                </div>
+                
+                <div class="rama">
+                    <strong>Menor participación</strong>
+                    <p>Ciudadana por falta de formación</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="leyenda">
+            <h3>Leyenda del Árbol de Problemas:</h3>
+            <div class="leyenda-item">
+                <div class="leyenda-color" style="background-color: var(--color-problema);"></div>
+                <div>Problema central (tronco)</div>
+            </div>
+            <div class="leyenda-item">
+                <div class="leyenda-color" style="background-color: var(--color-causa);"></div>
+                <div>Raíces (causas principales)</div>
+            </div>
+            <div class="leyenda-item">
+                <div class="leyenda-color" style="background-color: var(--color-consecuencia);"></div>
+                <div>Ramas (consecuencias)</div>
+            </div>
+        </div>
+        
+        <footer>
+            Análisis educativo | Educación nocturna | © 2023
+        </footer>
+    </div>
+    
+    <script>
+        // Animación al cargar
+        document.querySelectorAll('.raiz, .rama').forEach((item, index) => {
+            item.style.opacity = '0';
+            setTimeout(() => {
+                item.style.transition = 'opacity 0.5s ease';
+                item.style.opacity = '1';
+            }, 100 + index * 150);
+        });
+        
+        // Efecto al pasar el ratón
+        document.querySelectorAll('.raiz, .rama').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = '3px 3px 10px rgba(0,0,0,0.1)';
+            });
+        });
+    </script>
+</body>
+</html>
