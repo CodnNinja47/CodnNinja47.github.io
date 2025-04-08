@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fichas Mnemotécnicas Arquitectura 8086</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            padding: 30px;
+        }
+        
+        .ficha {
+            width: 320px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e1e4e8;
+        }
+        
+        .ficha:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        .ficha::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+        }
+        
+        .titulo {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .titulo .emoji {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        
+        .nemotecnia {
+            background-color: #f8f9fa;
+            padding: 14px;
+            border-left: 4px solid #4b6cb7;
+            font-style: italic;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+            color: #2c3e50;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .subtitulo {
+            font-weight: 600;
+            color: #34495e;
+            margin: 15px 0 8px 0;
+            font-size: 16px;
+        }
+        
+        .contenido {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        
+        .contenido ul {
+            padding-left: 20px;
+            margin: 8px 0;
+        }
+        
+        .contenido li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 15px;
+        }
+        
+        .contenido li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #4b6cb7;
+            font-weight: bold;
+        }
+        
+        .contenido ul ul {
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+        
+        .contenido ul ul li:before {
+            content: '◦';
+            color: #718096;
+        }
+        
+        /* Colores diferenciados para cada ficha */
+        .ficha:nth-child(1)::before {
+            background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+        }
+        
+        .ficha:nth-child(2)::before {
+            background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        .ficha:nth-child(3)::before {
+            background: linear-gradient(90deg, #c31432 0%, #240b36 100%);
+        }
+        
+        .ficha:nth-child(2) .nemotecnia {
+            border-left-color: #11998e;
+        }
+        
+        .ficha:nth-child(3) .nemotecnia {
+            border-left-color: #c31432;
+        }
+    </style>
+</head>
+<body>
+    <!-- Ficha 1: Microprocesador 8086 -->
+    <div class="ficha">
+        <div class="titulo"><span class="emoji">🧠</span> El Microprocesador 8086</div>
+        <div class="nemotecnia">“El 8086 es como una orquesta: el BIU toca, el EU dirige”</div>
+        <div class="contenido">
+            <div class="subtitulo">Datos clave:</div>
+            <ul>
+                <li><strong>Arquitectura:</strong> 16 bits</li>
+                <li><strong>Registros:</strong> Segmentados (64KB por segmento)</li>
+                <li><strong>Dos unidades internas:</strong>
+                    <ul>
+                        <li>EU (Execution Unit): Ejecuta instrucciones</li>
+                        <li>BIU (Bus Interface Unit): Comunicación con memoria y periféricos</li>
+                    </ul>
+                </li>
+                <li><strong>Capacidad:</strong> Direcciona hasta 1 MB de memoria</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Ficha 2: Registros Internos del 8086 -->
+    <div class="ficha">
+        <div class="titulo"><span class="emoji">💾</span> Registros Internos del 8086</div>
+        <div class="nemotecnia">“D-S-P-B: Datos, Segmentos, Punteros y Banderas”</div>
+        <div class="contenido">
+            <div class="subtitulo">Clasificación de registros:</div>
+            <ul>
+                <li><strong>Registros de Datos:</strong>
+                    <ul>
+                        <li>AX (Acumulador)</li>
+                        <li>BX (Base)</li>
+                        <li>CX (Contador)</li>
+                        <li>DX (Datos)</li>
+                    </ul>
+                </li>
+                <li><strong>Registros de Segmento:</strong>
+                    <ul>
+                        <li>CS (Código)</li>
+                        <li>DS (Datos)</li>
+                        <li>ES (Extra)</li>
+                        <li>SS (Pila)</li>
+                    </ul>
+                </li>
+                <li><strong>Registros de Puntero/Índice:</strong>
+                    <ul>
+                        <li>SP (Stack Pointer)</li>
+                        <li>BP (Base Pointer)</li>
+                        <li>SI (Source Index)</li>
+                        <li>DI (Destination Index)</li>
+                    </ul>
+                </li>
+                <li><strong>Registros de Banderas:</strong>
+                    <ul>
+                        <li>Indican condiciones del CPU (Zero, Carry, Overflow, etc.)</li>
+                        <li>IP (Instruction Pointer): Dirección de la siguiente instrucción</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Ficha 3: Lenguaje Assembler (TASM y MASM) -->
+    <div class="ficha">
+        <div class="titulo"><span class="emoji">⚙️</span> Lenguaje Assembler (TASM y MASM)</div>
+        <div class="nemotecnia">“Assembler: traductor fiel del alma del hardware”</div>
+        <div class="contenido">
+            <div class="subtitulo">TASM (Turbo Assembler) y MASM (Microsoft Assembler):</div>
+            <ul>
+                <li>Ensambladores utilizados para traducir código de bajo nivel (ASM) a lenguaje máquina</li>
+                <li>Sintaxis parecida pero diferente configuración</li>
+                <li><strong>Comandos comunes:</strong>
+                    <ul>
+                        <li>MOV: mueve datos</li>
+                        <li>ADD: suma</li>
+                        <li>SUB: resta</li>
+                        <li>INT: interrupciones</li>
+                    </ul>
+                </li>
+                <li><strong>Tienen dos fases:</strong>
+                    <ul>
+                        <li>Compilación: se convierte a código objeto</li>
+                        <li>Enlazado: genera el ejecutable (.exe o .com)</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
